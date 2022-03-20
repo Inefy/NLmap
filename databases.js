@@ -1,11 +1,11 @@
 const MongoClient = require("mongodb").MongoClient
-const url ="mongodb://localhost:27017";
+const url ="mongodb://127.0.0.1:27017";
 const client = new MongoClient(url);
 var populationdb
-async function connectPopulationDB(){
+async function connectDB(){
     try {
-    await client.connect();
-    populationdb = await client.db('population');
+    const x = await client.connect();
+    populationdb = x.db('population');
     console.log('connected to mongodb');
     } catch (error) {
         throw(error);
@@ -14,7 +14,4 @@ async function connectPopulationDB(){
 async function getPopulationDB(){
     return populationdb;
 }
-
-// testing the function to make sure they throw no errors
-connectPopulationDB();
-getPopulationDB();
+connectDB(); //everything here works perfect
